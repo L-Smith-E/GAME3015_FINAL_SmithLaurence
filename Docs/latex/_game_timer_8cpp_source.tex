@@ -1,0 +1,134 @@
+\hypertarget{_game_timer_8cpp_source}{}\doxysection{Game\+Timer.\+cpp}
+\label{_game_timer_8cpp_source}\index{Common/GameTimer.cpp@{Common/GameTimer.cpp}}
+\mbox{\hyperlink{_game_timer_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_game_timer_8h}{GameTimer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00004}\mbox{\hyperlink{class_game_timer_a439d589144db6da4918453e6f2a3c412}{00004}} \mbox{\hyperlink{class_game_timer_a439d589144db6da4918453e6f2a3c412}{GameTimer::GameTimer}}()}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00005}00005 : mSecondsPerCount(0.0), mDeltaTime(-\/1.0), mBaseTime(0), }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00006}00006   mPausedTime(0), mPrevTime(0), mCurrTime(0), mStopped(false)}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00007}00007 \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00008}00008     \_\_int64 countsPerSec;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00009}00009     QueryPerformanceFrequency((LARGE\_INTEGER*)\&countsPerSec);}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00010}00010     \mbox{\hyperlink{class_game_timer_a328b88357900be43047dbffe8f874ff5}{mSecondsPerCount}} = 1.0 / (double)countsPerSec;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00011}00011 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00013}00013 \textcolor{comment}{// Returns the total time elapsed since Reset() was called, NOT counting any}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00014}00014 \textcolor{comment}{// time when the clock is stopped.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00015}\mbox{\hyperlink{class_game_timer_a4d51c259eeb170d1841f84f41779592d}{00015}} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_game_timer_a4d51c259eeb170d1841f84f41779592d}{GameTimer::TotalTime}}()\textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00016}00016 \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00017}00017     \textcolor{comment}{// If we are stopped, do not count the time that has passed since we stopped.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00018}00018     \textcolor{comment}{// Moreover, if we previously already had a pause, the distance }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00019}00019     \textcolor{comment}{// mStopTime -\/ mBaseTime includes paused time, which we do not want to count.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00020}00020     \textcolor{comment}{// To correct this, we can subtract the paused time from mStopTime:  }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00021}00021     \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00022}00022     \textcolor{comment}{//                     |<-\/-\/paused time-\/-\/>|}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00023}00023     \textcolor{comment}{// -\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/> time}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00024}00024     \textcolor{comment}{//  mBaseTime       mStopTime        startTime     mStopTime    mCurrTime}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00026}00026     \textcolor{keywordflow}{if}( \mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}} )}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00027}00027     \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00028}00028         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{float})(((\mbox{\hyperlink{class_game_timer_a77f397ebc6ed463721bedd6a4d9ea8cb}{mStopTime}} -\/ \mbox{\hyperlink{class_game_timer_adbeb5a6c41217856b457b4ccc750dcc7}{mPausedTime}})-\/\mbox{\hyperlink{class_game_timer_a424093031f26d448ad23ec7f7a19e608}{mBaseTime}})*\mbox{\hyperlink{class_game_timer_a328b88357900be43047dbffe8f874ff5}{mSecondsPerCount}});}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00029}00029     \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00031}00031     \textcolor{comment}{// The distance mCurrTime -\/ mBaseTime includes paused time,}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00032}00032     \textcolor{comment}{// which we do not want to count.  To correct this, we can subtract }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00033}00033     \textcolor{comment}{// the paused time from mCurrTime:  }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00034}00034     \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00035}00035     \textcolor{comment}{//  (mCurrTime -\/ mPausedTime) -\/ mBaseTime }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00036}00036     \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00037}00037     \textcolor{comment}{//                     |<-\/-\/paused time-\/-\/>|}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00038}00038     \textcolor{comment}{// -\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/> time}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00039}00039     \textcolor{comment}{//  mBaseTime       mStopTime        startTime     mCurrTime}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00040}00040     }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00041}00041     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00042}00042     \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00043}00043         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{float})(((\mbox{\hyperlink{class_game_timer_a27ead1553e2bf00184be52df7fd3ea53}{mCurrTime}}-\/\mbox{\hyperlink{class_game_timer_adbeb5a6c41217856b457b4ccc750dcc7}{mPausedTime}})-\/\mbox{\hyperlink{class_game_timer_a424093031f26d448ad23ec7f7a19e608}{mBaseTime}})*\mbox{\hyperlink{class_game_timer_a328b88357900be43047dbffe8f874ff5}{mSecondsPerCount}});}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00044}00044     \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00045}00045 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00047}\mbox{\hyperlink{class_game_timer_a67d0ce60fa40d5ff728d101fc31e30f6}{00047}} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_game_timer_a67d0ce60fa40d5ff728d101fc31e30f6}{GameTimer::DeltaTime}}()\textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00048}00048 \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00049}00049     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{float})\mbox{\hyperlink{class_game_timer_ac1082a00c6b98bf0b0976682547445cb}{mDeltaTime}};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00050}00050 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00052}\mbox{\hyperlink{class_game_timer_af67b252c869cc649971b8cceefcb1eb8}{00052}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_timer_af67b252c869cc649971b8cceefcb1eb8}{GameTimer::Reset}}()}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00053}00053 \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00054}00054     \_\_int64 currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00055}00055     QueryPerformanceCounter((LARGE\_INTEGER*)\&currTime);}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00057}00057     \mbox{\hyperlink{class_game_timer_a424093031f26d448ad23ec7f7a19e608}{mBaseTime}} = currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00058}00058     \mbox{\hyperlink{class_game_timer_a9fb99d6fd14d65a95a3c3bdc015953eb}{mPrevTime}} = currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00059}00059     \mbox{\hyperlink{class_game_timer_a77f397ebc6ed463721bedd6a4d9ea8cb}{mStopTime}} = 0;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00060}00060     \mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}}  = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00061}00061 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00063}\mbox{\hyperlink{class_game_timer_a4af503863ddee320c9e034dc2938c2e1}{00063}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_timer_a4af503863ddee320c9e034dc2938c2e1}{GameTimer::Start}}()}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00064}00064 \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00065}00065     \_\_int64 startTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00066}00066     QueryPerformanceCounter((LARGE\_INTEGER*)\&startTime);}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00069}00069     \textcolor{comment}{// Accumulate the time elapsed between stop and start pairs.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00070}00070     \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00071}00071     \textcolor{comment}{//                     |<-\/-\/-\/-\/-\/-\/-\/d-\/-\/-\/-\/-\/-\/-\/>|}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00072}00072     \textcolor{comment}{// -\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/> time}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00073}00073     \textcolor{comment}{//  mBaseTime       mStopTime        startTime     }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00074}00074 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00075}00075     \textcolor{keywordflow}{if}( \mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}} )}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00076}00076     \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00077}00077         \mbox{\hyperlink{class_game_timer_adbeb5a6c41217856b457b4ccc750dcc7}{mPausedTime}} += (startTime -\/ \mbox{\hyperlink{class_game_timer_a77f397ebc6ed463721bedd6a4d9ea8cb}{mStopTime}}); }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00079}00079         \mbox{\hyperlink{class_game_timer_a9fb99d6fd14d65a95a3c3bdc015953eb}{mPrevTime}} = startTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00080}00080         \mbox{\hyperlink{class_game_timer_a77f397ebc6ed463721bedd6a4d9ea8cb}{mStopTime}} = 0;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00081}00081         \mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}}  = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00082}00082     \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00083}00083 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00085}\mbox{\hyperlink{class_game_timer_a61b1ecea219fbe2dfff86f9f9cab98b1}{00085}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_timer_a61b1ecea219fbe2dfff86f9f9cab98b1}{GameTimer::Stop}}()}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00086}00086 \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00087}00087     \textcolor{keywordflow}{if}( !\mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}} )}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00088}00088     \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00089}00089         \_\_int64 currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00090}00090         QueryPerformanceCounter((LARGE\_INTEGER*)\&currTime);}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00092}00092         \mbox{\hyperlink{class_game_timer_a77f397ebc6ed463721bedd6a4d9ea8cb}{mStopTime}} = currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00093}00093         \mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}}  = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00094}00094     \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00095}00095 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00097}\mbox{\hyperlink{class_game_timer_ac02f02b90ae1c2d6a2834abb5069f367}{00097}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_timer_ac02f02b90ae1c2d6a2834abb5069f367}{GameTimer::Tick}}()}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00098}00098 \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00099}00099     \textcolor{keywordflow}{if}( \mbox{\hyperlink{class_game_timer_a12b856fa54aa26a4a6a0b22a7c0387a7}{mStopped}} )}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00100}00100     \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00101}00101         \mbox{\hyperlink{class_game_timer_ac1082a00c6b98bf0b0976682547445cb}{mDeltaTime}} = 0.0;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00102}00102         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00103}00103     \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00105}00105     \_\_int64 currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00106}00106     QueryPerformanceCounter((LARGE\_INTEGER*)\&currTime);}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00107}00107     \mbox{\hyperlink{class_game_timer_a27ead1553e2bf00184be52df7fd3ea53}{mCurrTime}} = currTime;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00109}00109     \textcolor{comment}{// Time difference between this frame and the previous.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00110}00110     \mbox{\hyperlink{class_game_timer_ac1082a00c6b98bf0b0976682547445cb}{mDeltaTime}} = (\mbox{\hyperlink{class_game_timer_a27ead1553e2bf00184be52df7fd3ea53}{mCurrTime}} -\/ \mbox{\hyperlink{class_game_timer_a9fb99d6fd14d65a95a3c3bdc015953eb}{mPrevTime}})*\mbox{\hyperlink{class_game_timer_a328b88357900be43047dbffe8f874ff5}{mSecondsPerCount}};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00112}00112     \textcolor{comment}{// Prepare for next frame.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00113}00113     \mbox{\hyperlink{class_game_timer_a9fb99d6fd14d65a95a3c3bdc015953eb}{mPrevTime}} = \mbox{\hyperlink{class_game_timer_a27ead1553e2bf00184be52df7fd3ea53}{mCurrTime}};}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00115}00115     \textcolor{comment}{// Force nonnegative.  The DXSDK's CDXUTTimer mentions that if the }}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00116}00116     \textcolor{comment}{// processor goes into a power save mode or we get shuffled to another}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00117}00117     \textcolor{comment}{// processor, then mDeltaTime can be negative.}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00118}00118     \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_game_timer_ac1082a00c6b98bf0b0976682547445cb}{mDeltaTime}} < 0.0)}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00119}00119     \{}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00120}00120         \mbox{\hyperlink{class_game_timer_ac1082a00c6b98bf0b0976682547445cb}{mDeltaTime}} = 0.0;}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00121}00121     \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00122}00122 \}}
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00127}00127 }
+\DoxyCodeLine{\Hypertarget{_game_timer_8cpp_source_l00128}00128 }
+
+\end{DoxyCode}

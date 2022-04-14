@@ -1,0 +1,61 @@
+\hypertarget{_state_8hpp_source}{}\doxysection{State.\+hpp}
+\label{_state_8hpp_source}\index{DirectX12Engine/DirectX12Engine/State.hpp@{DirectX12Engine/DirectX12Engine/State.hpp}}
+\mbox{\hyperlink{_state_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00001}00001 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00002}00002 \textcolor{preprocessor}{\#include "{}../../Common/d3dApp.h"{}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00003}00003 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00004}00004 \textcolor{comment}{//\#include "{}StateStack.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00005}00005 \textcolor{comment}{//\#include "{}World.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00006}00006 \textcolor{comment}{//\#include "{}ResourceIdentifiers.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00007}00007 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_state_identifiers_8hpp}{StateIdentifiers.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00012}00012 \textcolor{keyword}{class }\mbox{\hyperlink{class_state_stack}{StateStack}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00013}00013 \textcolor{keyword}{class }\mbox{\hyperlink{class_player}{Player}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00014}00014 \textcolor{keyword}{class }\mbox{\hyperlink{class_game}{Game}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00016}00016 \textcolor{comment}{//namespace render}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00017}00017 \textcolor{comment}{//\{}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00018}00018 \textcolor{comment}{//  class RenderWindow;}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00019}00019 \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00021}00021 \textcolor{keyword}{class }\mbox{\hyperlink{class_state}{State}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00022}00022 \{}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00023}00023 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00024}\mbox{\hyperlink{class_state_a71d9930be1a58be7f711e245b7965d48}{00024}}     \textcolor{keyword}{typedef} std::unique\_ptr<State> \mbox{\hyperlink{class_state_a71d9930be1a58be7f711e245b7965d48}{Ptr}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00026}\mbox{\hyperlink{struct_state_1_1_context}{00026}}     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_state_1_1_context}{Context}}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00027}00027     \{}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00028}00028         \mbox{\hyperlink{struct_state_1_1_context_a0830e032d751e36740792b7f8f287db3}{Context}}(\mbox{\hyperlink{class_player}{Player}}\& \mbox{\hyperlink{struct_state_1_1_context_a1c98434687748acdebf78fd80a4767ad}{player}});}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00029}00029         }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00030}\mbox{\hyperlink{struct_state_1_1_context_a1c98434687748acdebf78fd80a4767ad}{00030}}         \mbox{\hyperlink{class_player}{Player}}* \mbox{\hyperlink{struct_state_1_1_context_a1c98434687748acdebf78fd80a4767ad}{player}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00031}00031     \};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00033}00033 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00034}00034     \mbox{\hyperlink{class_state_a83ca8113fb10fada2b17b7a4885708e6}{State}}(\mbox{\hyperlink{class_state_stack}{StateStack}}\& stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} context, \mbox{\hyperlink{class_game}{Game}}* game);}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00035}00035     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_state_afab438d92b90dc18d194dbd9c9c8bab3}{\string~State}}();}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00037}\mbox{\hyperlink{class_state_ae261605bc40b7e3959ce5df5457e4942}{00037}}     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_state_ae261605bc40b7e3959ce5df5457e4942}{draw}}() = 0;}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00038}\mbox{\hyperlink{class_state_a3edbdcd142b9da8470d1f7d3fbe74e83}{00038}}     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_state_a3edbdcd142b9da8470d1f7d3fbe74e83}{update}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt) = 0;}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00039}\mbox{\hyperlink{class_state_a0812d7217de100d2ddf3cef2b158bede}{00039}}     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_state_a0812d7217de100d2ddf3cef2b158bede}{handleEvent}}(WPARAM btn) = 0;}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00040}00040     \textcolor{comment}{//virtual bool handleRealtimeInput() = 0;}}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00041}00041     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_state_a1334df98b35c466ca49dc44f4f128462}{LoadScene}}();}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00042}\mbox{\hyperlink{class_state_a0b2cc4d1f24881f8e0ac5dd5c80e4799}{00042}}     \mbox{\hyperlink{class_game}{Game}}* \mbox{\hyperlink{class_state_a0b2cc4d1f24881f8e0ac5dd5c80e4799}{mGame}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00044}00044 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00045}00045     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_state_a6763de833ceb9c23df45aff163a4a1cd}{requestStackPush}}(\mbox{\hyperlink{namespace_states_a571a0dc62822f97bb9511eb013d8e1c3}{States::ID}} stateID);}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00046}00046     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_state_aa418660892d6161772c907bd8d70f910}{requestStackPop}}();}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00047}00047     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_state_a4b602bed9bf0179ee5f6748fce340ae6}{requestStateClear}}();}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00049}00049     \mbox{\hyperlink{struct_state_1_1_context}{Context}}      \mbox{\hyperlink{class_state_a93a72915d1aad6d8f7eacc81094dc920}{getContext}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00050}\mbox{\hyperlink{class_state_af0424dd012cc1ceb6e0f416982aa9228}{00050}} \mbox{\hyperlink{class_state_stack}{StateStack}}* \mbox{\hyperlink{class_state_af0424dd012cc1ceb6e0f416982aa9228}{mStack}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00051}00051 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00052}00052     }
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00053}\mbox{\hyperlink{class_state_a7a3d9f2d67529dd7c2eaae143447511b}{00053}}     \mbox{\hyperlink{struct_state_1_1_context}{Context}}      \mbox{\hyperlink{class_state_a7a3d9f2d67529dd7c2eaae143447511b}{mContext}};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00054}00054 \};}
+\DoxyCodeLine{\Hypertarget{_state_8hpp_source_l00055}00055 }
+
+\end{DoxyCode}

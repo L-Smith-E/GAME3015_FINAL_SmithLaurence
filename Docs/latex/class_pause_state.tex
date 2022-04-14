@@ -1,0 +1,180 @@
+\hypertarget{class_pause_state}{}\doxysection{Pause\+State Class Reference}
+\label{class_pause_state}\index{PauseState@{PauseState}}
+
+
+{\ttfamily \#include $<$Pause\+State.\+hpp$>$}
+
+Inheritance diagram for Pause\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pause_state}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pause_state_a11c3d2753e04600466a56be9f12c5e48}{Pause\+State}} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \&stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} context, \mbox{\hyperlink{class_game}{Game}} $\ast$game)
+\item 
+\mbox{\hyperlink{class_pause_state_af5d47befed16ad991bd90f219d4985c7}{$\sim$\+Pause\+State}} ()
+\item 
+virtual void \mbox{\hyperlink{class_pause_state_ac4c159c2f6d32eedd351f39e36c43f9d}{draw}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_pause_state_a9822236314419b3b0d3519f4ff2cf5b6}{update}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+virtual bool \mbox{\hyperlink{class_pause_state_a45a475e6a652f4aaee479801a33b554b}{handle\+Event}} (WPARAM btn)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_pause_state_a0ff57ebc1dad595eb281b51b4121c3b1}{Load\+Scene}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene_node}{Scene\+Node}} $\ast$ \mbox{\hyperlink{class_pause_state_a745775b4f5abb499c5b8e825e368c12b}{m\+Scene\+Graph}}
+\item 
+\mbox{\hyperlink{class_sprite_node}{Sprite\+Node}} $\ast$ \mbox{\hyperlink{class_pause_state_a2c099a7047e0edc8f711db100635cf61}{m\+Background\+Sprite}}
+\item 
+\mbox{\hyperlink{class_sprite_node}{Sprite\+Node}} $\ast$ \mbox{\hyperlink{class_pause_state_aa8f343fadc13e60eef8475581bd517d1}{m\+Paused\+Text}}
+\item 
+\mbox{\hyperlink{class_sprite_node}{Sprite\+Node}} $\ast$ \mbox{\hyperlink{class_pause_state_a390368916581b8dc5fc371c70001fc7a}{m\+Instruction\+Text}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8hpp_source_l00008}{8}} of file \mbox{\hyperlink{_pause_state_8hpp_source}{Pause\+State.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_pause_state_a11c3d2753e04600466a56be9f12c5e48}\label{class_pause_state_a11c3d2753e04600466a56be9f12c5e48}} 
+\index{PauseState@{PauseState}!PauseState@{PauseState}}
+\index{PauseState@{PauseState}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{PauseState()}{PauseState()}}
+{\footnotesize\ttfamily Pause\+State\+::\+Pause\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_state_stack}{State\+Stack}} \&}]{stack,  }\item[{\mbox{\hyperlink{struct_state_1_1_context}{Context}}}]{context,  }\item[{\mbox{\hyperlink{class_game}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{_pause_state_8cpp_source}{Pause\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_pause_state_af5d47befed16ad991bd90f219d4985c7}\label{class_pause_state_af5d47befed16ad991bd90f219d4985c7}} 
+\index{PauseState@{PauseState}!````~PauseState@{$\sim$PauseState}}
+\index{````~PauseState@{$\sim$PauseState}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{$\sim$PauseState()}{~PauseState()}}
+{\footnotesize\ttfamily Pause\+State\+::$\sim$\+Pause\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{_pause_state_8cpp_source}{Pause\+State.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_pause_state_ac4c159c2f6d32eedd351f39e36c43f9d}\label{class_pause_state_ac4c159c2f6d32eedd351f39e36c43f9d}} 
+\index{PauseState@{PauseState}!draw@{draw}}
+\index{draw@{draw}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Pause\+State\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state_ae261605bc40b7e3959ce5df5457e4942}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8cpp_source_l00020}{20}} of file \mbox{\hyperlink{_pause_state_8cpp_source}{Pause\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_pause_state_a45a475e6a652f4aaee479801a33b554b}\label{class_pause_state_a45a475e6a652f4aaee479801a33b554b}} 
+\index{PauseState@{PauseState}!handleEvent@{handleEvent}}
+\index{handleEvent@{handleEvent}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{handleEvent()}{handleEvent()}}
+{\footnotesize\ttfamily bool Pause\+State\+::handle\+Event (\begin{DoxyParamCaption}\item[{WPARAM}]{btn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state_a0812d7217de100d2ddf3cef2b158bede}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8cpp_source_l00030}{30}} of file \mbox{\hyperlink{_pause_state_8cpp_source}{Pause\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_pause_state_a0ff57ebc1dad595eb281b51b4121c3b1}\label{class_pause_state_a0ff57ebc1dad595eb281b51b4121c3b1}} 
+\index{PauseState@{PauseState}!LoadScene@{LoadScene}}
+\index{LoadScene@{LoadScene}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{LoadScene()}{LoadScene()}}
+{\footnotesize\ttfamily void Pause\+State\+::\+Load\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_state_a1334df98b35c466ca49dc44f4f128462}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{_pause_state_8cpp_source}{Pause\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_pause_state_a9822236314419b3b0d3519f4ff2cf5b6}\label{class_pause_state_a9822236314419b3b0d3519f4ff2cf5b6}} 
+\index{PauseState@{PauseState}!update@{update}}
+\index{update@{update}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Pause\+State\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state_a3edbdcd142b9da8470d1f7d3fbe74e83}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8cpp_source_l00025}{25}} of file \mbox{\hyperlink{_pause_state_8cpp_source}{Pause\+State.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_pause_state_a2c099a7047e0edc8f711db100635cf61}\label{class_pause_state_a2c099a7047e0edc8f711db100635cf61}} 
+\index{PauseState@{PauseState}!mBackgroundSprite@{mBackgroundSprite}}
+\index{mBackgroundSprite@{mBackgroundSprite}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{mBackgroundSprite}{mBackgroundSprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite_node}{Sprite\+Node}}$\ast$ Pause\+State\+::m\+Background\+Sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{_pause_state_8hpp_source}{Pause\+State.\+hpp}}.
+
+\mbox{\Hypertarget{class_pause_state_a390368916581b8dc5fc371c70001fc7a}\label{class_pause_state_a390368916581b8dc5fc371c70001fc7a}} 
+\index{PauseState@{PauseState}!mInstructionText@{mInstructionText}}
+\index{mInstructionText@{mInstructionText}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{mInstructionText}{mInstructionText}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite_node}{Sprite\+Node}}$\ast$ Pause\+State\+::m\+Instruction\+Text\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8hpp_source_l00022}{22}} of file \mbox{\hyperlink{_pause_state_8hpp_source}{Pause\+State.\+hpp}}.
+
+\mbox{\Hypertarget{class_pause_state_aa8f343fadc13e60eef8475581bd517d1}\label{class_pause_state_aa8f343fadc13e60eef8475581bd517d1}} 
+\index{PauseState@{PauseState}!mPausedText@{mPausedText}}
+\index{mPausedText@{mPausedText}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{mPausedText}{mPausedText}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite_node}{Sprite\+Node}}$\ast$ Pause\+State\+::m\+Paused\+Text\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{_pause_state_8hpp_source}{Pause\+State.\+hpp}}.
+
+\mbox{\Hypertarget{class_pause_state_a745775b4f5abb499c5b8e825e368c12b}\label{class_pause_state_a745775b4f5abb499c5b8e825e368c12b}} 
+\index{PauseState@{PauseState}!mSceneGraph@{mSceneGraph}}
+\index{mSceneGraph@{mSceneGraph}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{mSceneGraph}{mSceneGraph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_node}{Scene\+Node}}$\ast$ Pause\+State\+::m\+Scene\+Graph\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_pause_state_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{_pause_state_8hpp_source}{Pause\+State.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Direct\+X12\+Engine/\+Direct\+X12\+Engine/\mbox{\hyperlink{_pause_state_8hpp}{Pause\+State.\+hpp}}\item 
+Direct\+X12\+Engine/\+Direct\+X12\+Engine/\mbox{\hyperlink{_pause_state_8cpp}{Pause\+State.\+cpp}}\end{DoxyCompactItemize}

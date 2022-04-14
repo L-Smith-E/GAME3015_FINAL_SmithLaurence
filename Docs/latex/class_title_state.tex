@@ -1,0 +1,168 @@
+\hypertarget{class_title_state}{}\doxysection{Title\+State Class Reference}
+\label{class_title_state}\index{TitleState@{TitleState}}
+
+
+{\ttfamily \#include $<$Title\+State.\+hpp$>$}
+
+Inheritance diagram for Title\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_title_state}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_title_state_a463192859ba4c100679877ccb68f77b7}{Title\+State}} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \&stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} context, \mbox{\hyperlink{class_game}{Game}} $\ast$game)
+\item 
+virtual void \mbox{\hyperlink{class_title_state_ae12beafe5aad6929a56089942de1220e}{draw}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_title_state_a26db23a9e13dcd488d0a550024aa67a0}{update}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+virtual bool \mbox{\hyperlink{class_title_state_a65406edb15b368148bcff51101acf8f2}{handle\+Event}} (WPARAM btn)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_title_state_a134e9ee8c5d1eb13ce876bdbf6c2c834}{Load\+Scene}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene_node}{Scene\+Node}} $\ast$ \mbox{\hyperlink{class_title_state_ac7de766ba6c74fba085deb49e3fa1105}{m\+Scene\+Graph}}
+\item 
+\mbox{\hyperlink{class_sprite_node}{Sprite\+Node}} $\ast$ \mbox{\hyperlink{class_title_state_a7adfb8976d6dc8c7481739f1544fbafb}{m\+Background\+Sprite}}
+\item 
+\mbox{\hyperlink{class_sprite_node}{Sprite\+Node}} $\ast$ \mbox{\hyperlink{class_title_state_a04418cd698bbd8e0c0ca32d6c6b1a288}{m\+Play\+Btn}}
+\item 
+bool \mbox{\hyperlink{class_title_state_a39ca2d577793818b9417017247d5c98c}{m\+Show\+Text}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_title_state_8hpp_source_l00008}{8}} of file \mbox{\hyperlink{_title_state_8hpp_source}{Title\+State.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_title_state_a463192859ba4c100679877ccb68f77b7}\label{class_title_state_a463192859ba4c100679877ccb68f77b7}} 
+\index{TitleState@{TitleState}!TitleState@{TitleState}}
+\index{TitleState@{TitleState}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{TitleState()}{TitleState()}}
+{\footnotesize\ttfamily Title\+State\+::\+Title\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_state_stack}{State\+Stack}} \&}]{stack,  }\item[{\mbox{\hyperlink{struct_state_1_1_context}{Context}}}]{context,  }\item[{\mbox{\hyperlink{class_game}{Game}} $\ast$}]{game }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{_title_state_8cpp_source}{Title\+State.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_title_state_ae12beafe5aad6929a56089942de1220e}\label{class_title_state_ae12beafe5aad6929a56089942de1220e}} 
+\index{TitleState@{TitleState}!draw@{draw}}
+\index{draw@{draw}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Title\+State\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state_ae261605bc40b7e3959ce5df5457e4942}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{_title_state_8cpp_source}{Title\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_title_state_a65406edb15b368148bcff51101acf8f2}\label{class_title_state_a65406edb15b368148bcff51101acf8f2}} 
+\index{TitleState@{TitleState}!handleEvent@{handleEvent}}
+\index{handleEvent@{handleEvent}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{handleEvent()}{handleEvent()}}
+{\footnotesize\ttfamily bool Title\+State\+::handle\+Event (\begin{DoxyParamCaption}\item[{WPARAM}]{btn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state_a0812d7217de100d2ddf3cef2b158bede}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{_title_state_8cpp_source}{Title\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_title_state_a134e9ee8c5d1eb13ce876bdbf6c2c834}\label{class_title_state_a134e9ee8c5d1eb13ce876bdbf6c2c834}} 
+\index{TitleState@{TitleState}!LoadScene@{LoadScene}}
+\index{LoadScene@{LoadScene}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{LoadScene()}{LoadScene()}}
+{\footnotesize\ttfamily void Title\+State\+::\+Load\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_state_a1334df98b35c466ca49dc44f4f128462}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{_title_state_8cpp_source}{Title\+State.\+cpp}}.
+
+\mbox{\Hypertarget{class_title_state_a26db23a9e13dcd488d0a550024aa67a0}\label{class_title_state_a26db23a9e13dcd488d0a550024aa67a0}} 
+\index{TitleState@{TitleState}!update@{update}}
+\index{update@{update}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Title\+State\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state_a3edbdcd142b9da8470d1f7d3fbe74e83}{State}}.
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8cpp_source_l00021}{21}} of file \mbox{\hyperlink{_title_state_8cpp_source}{Title\+State.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_title_state_a7adfb8976d6dc8c7481739f1544fbafb}\label{class_title_state_a7adfb8976d6dc8c7481739f1544fbafb}} 
+\index{TitleState@{TitleState}!mBackgroundSprite@{mBackgroundSprite}}
+\index{mBackgroundSprite@{mBackgroundSprite}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{mBackgroundSprite}{mBackgroundSprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite_node}{Sprite\+Node}}$\ast$ Title\+State\+::m\+Background\+Sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{_title_state_8hpp_source}{Title\+State.\+hpp}}.
+
+\mbox{\Hypertarget{class_title_state_a04418cd698bbd8e0c0ca32d6c6b1a288}\label{class_title_state_a04418cd698bbd8e0c0ca32d6c6b1a288}} 
+\index{TitleState@{TitleState}!mPlayBtn@{mPlayBtn}}
+\index{mPlayBtn@{mPlayBtn}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{mPlayBtn}{mPlayBtn}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite_node}{Sprite\+Node}}$\ast$ Title\+State\+::m\+Play\+Btn\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8hpp_source_l00022}{22}} of file \mbox{\hyperlink{_title_state_8hpp_source}{Title\+State.\+hpp}}.
+
+\mbox{\Hypertarget{class_title_state_ac7de766ba6c74fba085deb49e3fa1105}\label{class_title_state_ac7de766ba6c74fba085deb49e3fa1105}} 
+\index{TitleState@{TitleState}!mSceneGraph@{mSceneGraph}}
+\index{mSceneGraph@{mSceneGraph}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{mSceneGraph}{mSceneGraph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_node}{Scene\+Node}}$\ast$ Title\+State\+::m\+Scene\+Graph\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{_title_state_8hpp_source}{Title\+State.\+hpp}}.
+
+\mbox{\Hypertarget{class_title_state_a39ca2d577793818b9417017247d5c98c}\label{class_title_state_a39ca2d577793818b9417017247d5c98c}} 
+\index{TitleState@{TitleState}!mShowText@{mShowText}}
+\index{mShowText@{mShowText}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{mShowText}{mShowText}}
+{\footnotesize\ttfamily bool Title\+State\+::m\+Show\+Text\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_title_state_8hpp_source_l00023}{23}} of file \mbox{\hyperlink{_title_state_8hpp_source}{Title\+State.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Direct\+X12\+Engine/\+Direct\+X12\+Engine/\mbox{\hyperlink{_title_state_8hpp}{Title\+State.\+hpp}}\item 
+Direct\+X12\+Engine/\+Direct\+X12\+Engine/\mbox{\hyperlink{_title_state_8cpp}{Title\+State.\+cpp}}\end{DoxyCompactItemize}
