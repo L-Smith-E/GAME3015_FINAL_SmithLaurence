@@ -10,9 +10,9 @@ class MenuState : public State
 public:
 	MenuState(StateStack& stack, Context context, Game* game);
 	virtual ~MenuState();
-	virtual void			draw();
-	virtual bool			update(const GameTimer& gt);
-	virtual bool			handleEvent(WPARAM btn);
+	virtual void			draw() override;
+	virtual bool			update(const GameTimer& gt) override;
+	virtual bool			handleEvent(WPARAM btn) override;
 	//virtual bool			handleRealtimeInput()override;
 	void					updateOptionText();
 

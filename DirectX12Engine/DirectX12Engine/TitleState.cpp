@@ -28,7 +28,7 @@ bool TitleState::handleEvent(WPARAM btn)
 {
 	requestStackPop();
 	
-		requestStackPush(States::Menu);
+	requestStackPush(States::Menu);
 	
 	return true;
 	

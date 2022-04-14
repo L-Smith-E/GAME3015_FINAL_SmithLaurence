@@ -30,7 +30,7 @@ bool PauseState::update(const GameTimer& gt)
 bool PauseState::handleEvent(WPARAM btn)
 {
 
-	if (btn == VK_ESCAPE)
+	if (btn == 'P')
 	{
 		requestStackPop();
 	}

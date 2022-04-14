@@ -31,7 +31,7 @@ bool MenuState::update(const GameTimer& gt)
 
 bool MenuState::handleEvent(WPARAM btn)
 {
-	if (btn == VK_SPACE)
+	if (btn == 'E')
 	{
 		//requestStackPop();
 		requestStateClear();
@@ -45,7 +45,7 @@ bool MenuState::handleEvent(WPARAM btn)
 		return true;
 	}
 	else
-		return false;
+		return true;
 }
 
 void MenuState::LoadScene()

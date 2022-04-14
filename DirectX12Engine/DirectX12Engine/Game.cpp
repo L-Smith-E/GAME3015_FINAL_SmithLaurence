@@ -403,52 +403,63 @@ void Game::LoadTextures()
 	//Title BG
 	auto TitleBGTex = std::make_unique<Texture>();
 	TitleBGTex->Name = "TitleBGTex";
-	TitleBGTex->Filename = L"../../Textures/TitleScreen.dds";
+	TitleBGTex->Filename = L"../../Textures/TitleScrn.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), TitleBGTex->Filename.c_str(),
 		TitleBGTex->Resource, TitleBGTex->UploadHeap));
 
 	mTextures[TitleBGTex->Name] = std::move(TitleBGTex);
 
-	//Play Btn
-	auto PlayBtnTex = std::make_unique<Texture>();
-	PlayBtnTex->Name = "PlayBtnTex";
-	PlayBtnTex->Filename = L"../../Textures/Playbutton.dds";
+	//PauseTexture
+	auto PauseTex = std::make_unique<Texture>();
+	PauseTex->Name = "PauseTex";
+	PauseTex->Filename = L"../../Textures/GamePaused.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), PlayBtnTex->Filename.c_str(),
-		PlayBtnTex->Resource, PlayBtnTex->UploadHeap));
+		mCommandList.Get(), PauseTex->Filename.c_str(),
+		PauseTex->Resource, PauseTex->UploadHeap));
 
-	mTextures[PlayBtnTex->Name] = std::move(PlayBtnTex);
+	mTextures[PauseTex->Name] = std::move(PauseTex);
 
-	//Select
-	auto SelectionBtnTex = std::make_unique<Texture>();
-	SelectionBtnTex->Name = "SelectionBtnTex";
-	SelectionBtnTex->Filename = L"../../Textures/arrow.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), SelectionBtnTex->Filename.c_str(),
-		SelectionBtnTex->Resource, SelectionBtnTex->UploadHeap));
 
-	mTextures[SelectionBtnTex->Name] = std::move(SelectionBtnTex);
+	////Play Btn
+	//auto PlayBtnTex = std::make_unique<Texture>();
+	//PlayBtnTex->Name = "PlayBtnTex";
+	//PlayBtnTex->Filename = L"../../Textures/Play.dds";
+	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+	//	mCommandList.Get(), PlayBtnTex->Filename.c_str(),
+	//	PlayBtnTex->Resource, PlayBtnTex->UploadHeap));
 
-	//Quit
-	auto QuitBtnTex = std::make_unique<Texture>();
-	QuitBtnTex->Name = "QuitBtnTex";
-	QuitBtnTex->Filename = L"../../Textures/Quit button 2.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), QuitBtnTex->Filename.c_str(),
-		QuitBtnTex->Resource, QuitBtnTex->UploadHeap));
+	//mTextures[PlayBtnTex->Name] = std::move(PlayBtnTex);
 
-	mTextures[QuitBtnTex->Name] = std::move(QuitBtnTex);
+	////Select
+	//auto SelectionBtnTex = std::make_unique<Texture>();
+	//SelectionBtnTex->Name = "SelectionBtnTex";
+	//SelectionBtnTex->Filename = L"../../Textures/arrow.dds";
+	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+	//	mCommandList.Get(), SelectionBtnTex->Filename.c_str(),
+	//	SelectionBtnTex->Resource, SelectionBtnTex->UploadHeap));
 
-	//Options
-	auto OptionsBtnTex = std::make_unique<Texture>();
-	OptionsBtnTex->Name = "OptionsBtnTex";
-	OptionsBtnTex->Filename = L"../../Textures/Option button.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), OptionsBtnTex->Filename.c_str(),
-		OptionsBtnTex->Resource, OptionsBtnTex->UploadHeap));
+	//mTextures[SelectionBtnTex->Name] = std::move(SelectionBtnTex);
 
-	mTextures[OptionsBtnTex->Name] = std::move(OptionsBtnTex);
+	////Quit
+	//auto QuitBtnTex = std::make_unique<Texture>();
+	//QuitBtnTex->Name = "QuitBtnTex";
+	//QuitBtnTex->Filename = L"../../Textures/QuitButton.dds";
+	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+	//	mCommandList.Get(), QuitBtnTex->Filename.c_str(),
+	//	QuitBtnTex->Resource, QuitBtnTex->UploadHeap));
+
+	//mTextures[QuitBtnTex->Name] = std::move(QuitBtnTex);
+
+	////Options
+	//auto OptionsBtnTex = std::make_unique<Texture>();
+	//OptionsBtnTex->Name = "OptionsBtnTex";
+	//OptionsBtnTex->Filename = L"../../Textures/OptionButton.dds";
+	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+	//	mCommandList.Get(), OptionsBtnTex->Filename.c_str(),
+	//	OptionsBtnTex->Resource, OptionsBtnTex->UploadHeap));
+
+	//mTextures[OptionsBtnTex->Name] = std::move(OptionsBtnTex);
 
 	/*auto SelectionBtnTex = std::make_unique<Texture>();
 	SelectionBtnTex->Name = "SelectionBtnTex";
@@ -512,7 +523,7 @@ void Game::BuildDescriptorHeaps()
 	// Create the SRV heap.
 	//
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = 8;
+	srvHeapDesc.NumDescriptors = 10;
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
@@ -526,9 +537,10 @@ void Game::BuildDescriptorHeaps()
 	auto RaptorTex = mTextures["RaptorTex"]->Resource;
 	auto DesertTex = mTextures["DesertTex"]->Resource;
 	auto TitleBGTex = mTextures["TitleBGTex"]->Resource;
+	auto PauseTex = mTextures["PauseTex"]->Resource;
 	auto PlayBtnTex = mTextures["PlayBtnTex"]->Resource;
-	auto SelectionBtnTex = mTextures["SelectionBtnTex"]->Resource;
 	auto QuitBtnTex = mTextures["QuitBtnTex"]->Resource;
+	auto SelectionBtnTex = mTextures["SelectionBtnTex"]->Resource;
 	auto OptionsBtnTex = mTextures["OptionsBtnTex"]->Resource;
 	auto PlayBtn = mTextures["PlayBtn"]->Resource;
 
@@ -573,25 +585,30 @@ void Game::BuildDescriptorHeaps()
 	srvDesc.Format = TitleBGTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(TitleBGTex.Get(), &srvDesc, hDescriptor);
 
+	//PauseTex Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = PauseTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(PauseTex.Get(), &srvDesc, hDescriptor);
 	
-	////PlayBtn Descriptor
-	//hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	//srvDesc.Format = PlayBtnTex->GetDesc().Format;
-	//md3dDevice->CreateShaderResourceView(PlayBtnTex.Get(), &srvDesc, hDescriptor);
+	//PlayBtn Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = PlayBtnTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(PlayBtnTex.Get(), &srvDesc, hDescriptor);
 
 	//SelectionBtnTex descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = SelectionBtnTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(SelectionBtnTex.Get(), &srvDesc, hDescriptor);
 
-	////QuitBtn Descriptor
-	//hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	//srvDesc.Format = QuitBtnTex->GetDesc().Format;
-	//md3dDevice->CreateShaderResourceView(QuitBtnTex.Get(), &srvDesc, hDescriptor);
-	////OptionsBtn Descriptor
-	//hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	//srvDesc.Format = OptionsBtnTex->GetDesc().Format;
-	//md3dDevice->CreateShaderResourceView(OptionsBtnTex.Get(), &srvDesc, hDescriptor);
+	//QuitBtn Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = QuitBtnTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(QuitBtnTex.Get(), &srvDesc, hDescriptor);
+
+	//OptionsBtn Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = OptionsBtnTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(OptionsBtnTex.Get(), &srvDesc, hDescriptor);
 }
 
 void Game::BuildShadersAndInputLayout()
@@ -743,40 +760,50 @@ void Game::BuildMaterials()
 
 	mMaterials["TitleBGTex"] = std::move(TitleBGTex);
 
+	auto PauseTex = std::make_unique<Material>();
+	PauseTex->Name = "PauseTex";
+	PauseTex->MatCBIndex = 4;
+	PauseTex->DiffuseSrvHeapIndex = 4;
+	PauseTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	PauseTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	PauseTex->Roughness = 0.2f;
+
+	mMaterials["PauseTex"] = std::move(PauseTex);
+
 	auto PlayBtnTex = std::make_unique<Material>();
 	PlayBtnTex->Name = "PlayBtnTex";
-	PlayBtnTex->MatCBIndex = 3;
-	PlayBtnTex->DiffuseSrvHeapIndex = 3;
+	PlayBtnTex->MatCBIndex = 5;
+	PlayBtnTex->DiffuseSrvHeapIndex = 5;
 	PlayBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	PlayBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	PlayBtnTex->Roughness = 0.2f;
 
 	mMaterials["PlayBtnTex"] = std::move(PlayBtnTex);
 
-	auto SelectionBtnTex = std::make_unique<Material>();
-	SelectionBtnTex->Name = "SelectionBtnTex";
-	SelectionBtnTex->MatCBIndex = 3;
-	SelectionBtnTex->DiffuseSrvHeapIndex = 3;
-	SelectionBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	SelectionBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	SelectionBtnTex->Roughness = 0.2f;
-
-	mMaterials["SelectionBtnTex"] = std::move(SelectionBtnTex);
-
 	auto QuitBtnTex = std::make_unique<Material>();
 	QuitBtnTex->Name = "QuitBtnTex";
-	QuitBtnTex->MatCBIndex = 3;
-	QuitBtnTex->DiffuseSrvHeapIndex = 3;
+	QuitBtnTex->MatCBIndex = 6;
+	QuitBtnTex->DiffuseSrvHeapIndex = 6;
 	QuitBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	QuitBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	QuitBtnTex->Roughness = 0.2f;
 
 	mMaterials["QuitBtnTex"] = std::move(QuitBtnTex);
 
+	auto SelectionBtnTex = std::make_unique<Material>();
+	SelectionBtnTex->Name = "SelectionBtnTex";
+	SelectionBtnTex->MatCBIndex = 7;
+	SelectionBtnTex->DiffuseSrvHeapIndex = 7;
+	SelectionBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	SelectionBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	SelectionBtnTex->Roughness = 0.2f;
+
+	mMaterials["SelectionBtnTex"] = std::move(SelectionBtnTex);
+
 	auto OptionBtnTex = std::make_unique<Material>();
 	OptionBtnTex->Name = "OptionBtnTex";
-	OptionBtnTex->MatCBIndex = 3;
-	OptionBtnTex->DiffuseSrvHeapIndex = 3;
+	OptionBtnTex->MatCBIndex = 8;
+	OptionBtnTex->DiffuseSrvHeapIndex = 8;
 	OptionBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	OptionBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	OptionBtnTex->Roughness = 0.2f;
