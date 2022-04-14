@@ -85,13 +85,13 @@ void World::buildScene()
 	raptor2->setWorldRotation(0, XM_PI, 0);
 	mPlayerAircraft->attachChild(std::move(enemy2));
 
-	//std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame));
-	//mBackground = backgroundSprite.get();
-	////mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
-	//mBackground->setPosition(0, 0, 0.0);
-	//mBackground->setScale(200.0, 1.0, 200.0);
-	//mBackground->setVelocity(0,0, -mScrollSpeed);
-	//mSceneGraph->attachChild(std::move(backgroundSprite));
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame));
+	mBackground = backgroundSprite.get();
+	//mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
+	mBackground->setPosition(0, 0, 0.0);
+	mBackground->setScale(200.0, 1.0, 200.0);
+	mBackground->setVelocity(0,0, -mScrollSpeed);
+	mSceneGraph->attachChild(std::move(backgroundSprite));
 
 	mSceneGraph->build();
 }
