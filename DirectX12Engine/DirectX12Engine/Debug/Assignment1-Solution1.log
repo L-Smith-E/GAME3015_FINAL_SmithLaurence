@@ -1,0 +1,56 @@
+﻿  Camera.cpp
+  d3dApp.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dApp.cpp(198): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dApp.cpp(215): error C2102: '&' requires l-value
+  d3dUtil.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dUtil.cpp(30,5): warning C4244: 'argument': conversion from 'std::streamoff' to 'SIZE_T', possible loss of data
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dUtil.cpp(48): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dUtil.cpp(58): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dUtil.cpp(70,32): warning C4244: '=': conversion from 'UINT64' to 'LONG_PTR', possible loss of data
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dUtil.cpp(76): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\d3dUtil.cpp(79): error C2102: '&' requires l-value
+  DDSTextureLoader.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Common\DDSTextureLoader.cpp(1273): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\DDSTextureLoader.cpp(1292): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\DDSTextureLoader.cpp(1294): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\DDSTextureLoader.cpp(1305): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\DDSTextureLoader.cpp(1311): error C2102: '&' requires l-value
+  GameTimer.cpp
+  GeometryGenerator.cpp
+  MathHelper.cpp
+  Aircraft.cpp
+  Entity.cpp
+  FrameResource.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Common\UploadBuffer.h(24): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Common\UploadBuffer.h(9): message : while compiling class template member function 'UploadBuffer<PassConstants>::UploadBuffer(ID3D12Device *,UINT,bool)'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\memory(2833): message : see reference to function template instantiation 'UploadBuffer<PassConstants>::UploadBuffer(ID3D12Device *,UINT,bool)' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\memory(2536): message : see reference to class template instantiation 'UploadBuffer<PassConstants>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\memory(2535): message : while compiling class template member function 'void std::default_delete<UploadBuffer<PassConstants>>::operator ()(_Ty *) noexcept const'
+          with
+          [
+              _Ty=UploadBuffer<PassConstants>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\memory(2647): message : see reference to function template instantiation 'void std::default_delete<UploadBuffer<PassConstants>>::operator ()(_Ty *) noexcept const' being compiled
+          with
+          [
+              _Ty=UploadBuffer<PassConstants>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\memory(2574): message : see reference to class template instantiation 'std::default_delete<UploadBuffer<PassConstants>>' being compiled
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\FrameResource.h(65): message : see reference to class template instantiation 'std::unique_ptr<UploadBuffer<PassConstants>,std::default_delete<UploadBuffer<PassConstants>>>' being compiled
+  Game.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(24,24): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(115): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(107): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(129): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(326): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(327): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(328): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(651): error C2102: '&' requires l-value
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\Game.cpp(652): error C2102: '&' requires l-value
+  main.cpp
+  SceneNode.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\SceneNode.cpp(125): error C2102: '&' requires l-value
+  SpriteNode.cpp
+  World.cpp
+C:\Hooman\GBC\GAME3015\Week 4\Assignment1-Solution1\Assignment1-Solution1\World.cpp(35,42): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...

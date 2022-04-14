@@ -1,0 +1,17 @@
+﻿  Camera.cpp
+  d3dApp.cpp
+  d3dUtil.cpp
+  DDSTextureLoader.cpp
+  GameTimer.cpp
+  GeometryGenerator.cpp
+  MathHelper.cpp
+  Aircraft.cpp
+  Entity.cpp
+  FrameResource.cpp
+  Game.cpp
+  main.cpp
+  SceneNode.cpp
+  SpriteNode.cpp
+  World.cpp
+  Generating Code...
+  Assignment1-Solution1.vcxproj -> C:\School\Semester 9\Game Engine Development 2\Assignments\New Engine\Assignment1 template\Assignment1-Solution1\x64\Debug\Assignment1-Solution1.exe
