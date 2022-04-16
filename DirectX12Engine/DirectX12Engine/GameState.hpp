@@ -3,29 +3,28 @@
 
 #include "State.hpp"
 #include "World.hpp"
-#include  "Player.hpp"
+#include "Player.hpp"
 #include "SpriteNode.h"
 
 class GameState : public State
 {
 public:
-	GameState(StateStack& stack, Context context, Game* game);
+	GameState(StateStack* stack, Context* context);
 
-	virtual void		draw();
-	virtual bool		update(const GameTimer& gt);
-	virtual bool		handleEvent(WPARAM btn);
+	virtual void		draw() override;
+	virtual bool		update(const GameTimer& gt) override;
+	virtual bool		handleEvent(WPARAM btnState) override; 
+	virtual bool 		handleRealTimeInput() override;
+	virtual void 		LoadScene() override;
 	void ProcessInput();
 
 private:
-	World*		mWorld;
-	Player&		mPlayer;
+	World		mWorld;
+	
 
 public:
 	SceneNode* mSceneNode;
 	SpriteNode* mPauseSprite;
-
-private:
-	virtual void LoadScene() override;
 };
 
 #endif // BOOK_GAMESTATE_HPP

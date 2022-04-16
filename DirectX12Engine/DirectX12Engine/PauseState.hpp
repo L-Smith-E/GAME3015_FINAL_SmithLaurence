@@ -8,21 +8,22 @@
 class PauseState : public State
 {
 public:
-	PauseState(StateStack& stack, Context context, Game* game);
+	PauseState(StateStack* stack, Context* context);
 	~PauseState();
 
-	virtual void  draw();
-	virtual bool update(const GameTimer& gt);
-	virtual bool handleEvent(WPARAM btn);
-
+	virtual void		draw() override;
+	virtual bool		update(const GameTimer& gt) override;
+	virtual bool		handleEvent(WPARAM btnState) override;
+	virtual bool 		handleRealTimeInput() override;
+	virtual void 		LoadScene() override;
 private:
-	SceneNode* mSceneGraph;
+	//SceneNode* mSceneGraph;
 	SpriteNode* mBackgroundSprite;
 	SpriteNode* mPausedText;
 	SpriteNode* mInstructionText;
 
 private:
-	virtual void LoadScene() override;
+	
 };
 #pragma endregion
 

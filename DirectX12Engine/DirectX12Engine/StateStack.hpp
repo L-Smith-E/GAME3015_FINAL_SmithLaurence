@@ -9,8 +9,6 @@
 #include <functional>
 #include <map>
 
-class Game;
-
 class StateStack
 {
 
@@ -26,11 +24,11 @@ public:
 	explicit StateStack(State::Context context);
 
 	template <typename T>
-	void	registerState(States::ID stateID, Game* game);
+	void	registerState(States::ID stateID);
 
 	void	update(const GameTimer& gt);
 	void	draw();
-	void	handleEvent(WPARAM btn);
+	void	handleEvent(WPARAM btnState);
 	//void handleRealtimeInput();
 
 	void	pushState(States::ID stateID);
@@ -64,11 +62,11 @@ private:
 };
 
 template <typename T>
-void StateStack::registerState(States::ID stateID, Game* game)
+void StateStack::registerState(States::ID stateID)
 {
-	mFactories[stateID] = [this, game]()
+	mFactories[stateID] = [this]()
 	{
-		return State::Ptr(new T(*this, mContext, game));
+		return State::Ptr(new T(this, &mContext));
 	};
 }
 #endif // BOOK_STATESTACK_HPP

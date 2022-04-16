@@ -3,11 +3,10 @@
 #include "Game.hpp"
 
 
-TitleState::TitleState(StateStack& stack, Context context, Game* game)
-	: State(stack, context, game)
+TitleState::TitleState(StateStack* stack, Context* context)
+	: State(stack, context)
 ,	mShowText(true)
 ,	mBackgroundSprite(nullptr)
-,	mSceneGraph(new SceneNode(game))
 //,	mTextEffectTime(())
 {
 	LoadScene();
@@ -24,7 +23,7 @@ bool TitleState::update(const GameTimer& gt)
 	return true;
 }
 
-bool TitleState::handleEvent(WPARAM btn)
+bool TitleState::handleEvent(WPARAM btnState)
 {
 	requestStackPop();
 	
@@ -34,16 +33,21 @@ bool TitleState::handleEvent(WPARAM btn)
 	
 }
 
+ bool TitleState::handleRealTimeInput()
+ {
+
+ }
+
 void TitleState::LoadScene()
 {
 	//Clear items, and resources.
-	mGame->mAllRitems.clear();
-	mGame->mOpaqueRitems.clear();
-	mGame->mFrameResources.clear();
+	mContext-> mGame->mAllRitems.clear();
+	mContext->mGame->mOpaqueRitems.clear();
+	mContext->mGame->mFrameResources.clear();
 	// Build our materials
-	mGame->BuildMaterials();
+	mContext->mGame->BuildMaterials();
 
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, "TitleBGTex"));
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mContext->mGame, "TitleBGTex"));
 	mBackgroundSprite = backgroundSprite.get();
 	mBackgroundSprite->setPosition(0, 0, 0);
 	mBackgroundSprite->setScale(600.0, 100000.0, 400);
@@ -58,9 +62,9 @@ void TitleState::LoadScene()
 	mSceneGraph->attachChild(std::move(playBtnTex));*/
 
 	mSceneGraph->build();
-	for (auto& e : mGame->mAllRitems)
-		mGame->mOpaqueRitems.push_back(e.get());
+	for (auto& e : mContext->mGame->mAllRitems)
+		mContext->mGame->mOpaqueRitems.push_back(e.get());
 
-	mGame->BuildFrameResources();
+	mContext->mGame->BuildFrameResources();
 }
 

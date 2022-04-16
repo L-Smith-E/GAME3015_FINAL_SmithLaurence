@@ -30,9 +30,9 @@ public:
 	virtual void OnMouseDown(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseUp(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseMove(WPARAM btnState, int x, int y)override;
-	//virtual void processEvents(WPARAM btn) override;
+	//virtual void processEvents(WPARAM btnState) override;
 
-	virtual void OnKeyboardInput(WPARAM btn);
+	virtual void OnKeyboardInput(WPARAM btnState);
 	void UpdateCamera(const GameTimer& gt);
 	void AnimateMaterials(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);

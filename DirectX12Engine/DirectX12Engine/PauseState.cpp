@@ -3,12 +3,11 @@
 #include "GameState.hpp"
 #include "Game.hpp"
 
-PauseState::PauseState(StateStack& stack, Context context, Game* game)
-	:State(stack, context, game)
+PauseState::PauseState(StateStack* stack, Context* context)
+	:State(stack, context)
 ,  mBackgroundSprite(nullptr)
 ,  mPausedText()
 ,  mInstructionText()
-,	mSceneGraph(new SceneNode(game))
 {
 	LoadScene();
 }
@@ -27,20 +26,24 @@ bool PauseState::update(const GameTimer& gt)
 	return false;
 }
 
-bool PauseState::handleEvent(WPARAM btn)
+bool PauseState::handleEvent(WPARAM btnState)
 {
 
-	if (btn == 'P')
+	if (btnState == 'P')
 	{
 		requestStackPop();
 	}
-	else if (btn == VK_BACK)
+	else if (btnState == VK_BACK)
 	{
 		requestStateClear();
 		requestStackPush(States::Menu);
 	}
 	return false;
 }
+ bool PauseState::handleRealTimeInput()
+ {
+
+ }
 
 void PauseState::LoadScene()
 {

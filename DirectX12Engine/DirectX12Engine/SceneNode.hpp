@@ -53,14 +53,14 @@ struct Command;
 class SceneNode
 {
 public:
-	typedef std::unique_ptr<SceneNode> Ptr;
+	typedef std::unique_ptr<SceneNode> ScenePtr;
 
 
 public:
 	SceneNode(Game* game);
 
-	void					attachChild(Ptr child);
-	Ptr						detachChild(const SceneNode& node);
+	void					attachChild(ScenePtr child);
+	ScenePtr				detachChild(const SceneNode& node);
 
 	void					update(const GameTimer& gt);
 	void					draw() const;
@@ -98,7 +98,7 @@ private:
 	XMFLOAT3				mWorldPosition;
 	XMFLOAT3				mWorldRotation;
 	XMFLOAT3				mWorldScaling;
-	std::vector<Ptr>		mChildren;
+	std::vector<ScenePtr>	mChildren;
 	SceneNode*				mParent;
 };
 

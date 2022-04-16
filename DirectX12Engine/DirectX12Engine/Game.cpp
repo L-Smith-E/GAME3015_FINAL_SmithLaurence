@@ -5,7 +5,7 @@ const int gNumFrameResources = 3;
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
 	, mWorld(this)
-	, mStateStack(State::Context(mPlayer))
+	, mStateStack(State::Context(&mPlayer, this))
 {
 }
 
@@ -69,10 +69,17 @@ void Game::OnResize()
 
 void Game::Update(const GameTimer& gt)
 {
-	//OnKeyboardInput(gt);
+	//OnKeyboardInput();
 	//mWorld.update(gt);
 	mStateStack.update(gt);
 	//processEvents()
+
+	if (mStateStack.isEmpty())
+	{
+		PostQuitMessage(0);
+		return;
+	}
+
 	UpdateCamera(gt);
 	// Cycle through the circular frame resource array.
 	mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;
@@ -171,44 +178,44 @@ void Game::OnMouseUp(WPARAM btnState, int x, int y)
 
 void Game::OnMouseMove(WPARAM btnState, int x, int y)
 {
-	//if ((btnState & MK_LBUTTON) != 0)
-	//{
-	//	// Make each pixel correspond to a quarter of a degree.
-	//	float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
-	//	float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
+	if ((btnState & MK_LBUTTON) != 0)
+	{
+		// Make each pixel correspond to a quarter of a degree.
+		float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
+		float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
 
-	//	mCamera.Pitch(dy);
-	//	mCamera.RotateY(dx);
-	//}
-	//else if ((btnState & MK_RBUTTON) != 0)
-	//{
-	//	// Make each pixel correspond to 0.2 unit in the scene.
-	//	float dx = 0.05f * static_cast<float>(x - mLastMousePos.x);
-	//	float dy = 0.05f * static_cast<float>(y - mLastMousePos.y);
+		mCamera.Pitch(dy);
+		mCamera.RotateY(dx);
+	}
+	else if ((btnState & MK_RBUTTON) != 0)
+	{
+		// Make each pixel correspond to 0.2 unit in the scene.
+		float dx = 0.05f * static_cast<float>(x - mLastMousePos.x);
+		float dy = 0.05f * static_cast<float>(y - mLastMousePos.y);
 
-	//	//To Do
-	//	// Update the camera radius based on input.
-	//	//mRadius += dx - dy;
+		//To Do
+		// Update the camera radius based on input.
+		//mRadius += dx - dy;
 
-	//	// Restrict the radius.
-	//	//mRadius = MathHelper::Clamp(mRadius, 5.0f, 150.0f);
-	//}
+		// Restrict the radius.
+		//mRadius = MathHelper::Clamp(mRadius, 5.0f, 150.0f);
+	}
 
-	//mLastMousePos.x = x;
-	//mLastMousePos.y = y;
+	mLastMousePos.x = x;
+	mLastMousePos.y = y;
 }
 
-//void Game::processEvents(WPARAM btn)
+//void Game::processEvents(WPARAM btnState)
 //{
-//	mStateStack.handleEvent(btn);
+//	mStateStack.handleEvent(btnState);
 //	/*CommandQueue& commands = mWorld.getCommandQueue();
 //	mPlayer.handleEvent(commands);
 //	mPlayer.handleRealtimeInput(commands);*/
 //}
 
-void Game::OnKeyboardInput(WPARAM btn)
+void Game::OnKeyboardInput(WPARAM btnState)
 {
-	mStateStack.handleEvent(btn);
+	mStateStack.handleEvent(btnState);
 	/*const float dt = gt.DeltaTime();
 
 	mCamera.GetLook();
@@ -278,10 +285,10 @@ void Game::UpdateCamera(const GameTimer& gt)
 	mCamera.UpdateViewMatrix();
 }
 
-void Game::AnimateMaterials(const GameTimer& gt)
-{
-
-}
+//void Game::AnimateMaterials(const GameTimer& gt)
+//{
+//
+//}
 
 void Game::UpdateObjectCBs(const GameTimer& gt)
 {
@@ -421,45 +428,45 @@ void Game::LoadTextures()
 	mTextures[PauseTex->Name] = std::move(PauseTex);
 
 
-	////Play Btn
-	//auto PlayBtnTex = std::make_unique<Texture>();
-	//PlayBtnTex->Name = "PlayBtnTex";
-	//PlayBtnTex->Filename = L"../../Textures/Play.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), PlayBtnTex->Filename.c_str(),
-	//	PlayBtnTex->Resource, PlayBtnTex->UploadHeap));
+	//Play Btn
+	auto PlayBtnTex = std::make_unique<Texture>();
+	PlayBtnTex->Name = "PlayBtnTex";
+	PlayBtnTex->Filename = L"../../Textures/playb.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), PlayBtnTex->Filename.c_str(),
+		PlayBtnTex->Resource, PlayBtnTex->UploadHeap));
 
-	//mTextures[PlayBtnTex->Name] = std::move(PlayBtnTex);
+	mTextures[PlayBtnTex->Name] = std::move(PlayBtnTex);
 
-	////Select
-	//auto SelectionBtnTex = std::make_unique<Texture>();
-	//SelectionBtnTex->Name = "SelectionBtnTex";
-	//SelectionBtnTex->Filename = L"../../Textures/arrow.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), SelectionBtnTex->Filename.c_str(),
-	//	SelectionBtnTex->Resource, SelectionBtnTex->UploadHeap));
+	//Select
+	auto SelectionBtnTex = std::make_unique<Texture>();
+	SelectionBtnTex->Name = "SelectionBtnTex";
+	SelectionBtnTex->Filename = L"../../Textures/arrow.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), SelectionBtnTex->Filename.c_str(),
+		SelectionBtnTex->Resource, SelectionBtnTex->UploadHeap));
 
-	//mTextures[SelectionBtnTex->Name] = std::move(SelectionBtnTex);
+	mTextures[SelectionBtnTex->Name] = std::move(SelectionBtnTex);
 
-	////Quit
-	//auto QuitBtnTex = std::make_unique<Texture>();
-	//QuitBtnTex->Name = "QuitBtnTex";
-	//QuitBtnTex->Filename = L"../../Textures/QuitButton.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), QuitBtnTex->Filename.c_str(),
-	//	QuitBtnTex->Resource, QuitBtnTex->UploadHeap));
+	//Quit
+	auto QuitBtnTex = std::make_unique<Texture>();
+	QuitBtnTex->Name = "QuitBtnTex";
+	QuitBtnTex->Filename = L"../../Textures/QuitButton.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), QuitBtnTex->Filename.c_str(),
+		QuitBtnTex->Resource, QuitBtnTex->UploadHeap));
 
-	//mTextures[QuitBtnTex->Name] = std::move(QuitBtnTex);
+	mTextures[QuitBtnTex->Name] = std::move(QuitBtnTex);
 
-	////Options
-	//auto OptionsBtnTex = std::make_unique<Texture>();
-	//OptionsBtnTex->Name = "OptionsBtnTex";
-	//OptionsBtnTex->Filename = L"../../Textures/OptionButton.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), OptionsBtnTex->Filename.c_str(),
-	//	OptionsBtnTex->Resource, OptionsBtnTex->UploadHeap));
+	//Options
+	auto OptionsBtnTex = std::make_unique<Texture>();
+	OptionsBtnTex->Name = "OptionsBtnTex";
+	OptionsBtnTex->Filename = L"../../Textures/OptionButton.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), OptionsBtnTex->Filename.c_str(),
+		OptionsBtnTex->Resource, OptionsBtnTex->UploadHeap));
 
-	//mTextures[OptionsBtnTex->Name] = std::move(OptionsBtnTex);
+	mTextures[OptionsBtnTex->Name] = std::move(OptionsBtnTex);
 
 	/*auto SelectionBtnTex = std::make_unique<Texture>();
 	SelectionBtnTex->Name = "SelectionBtnTex";
@@ -523,7 +530,7 @@ void Game::BuildDescriptorHeaps()
 	// Create the SRV heap.
 	//
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = 10;
+	srvHeapDesc.NumDescriptors = 9;
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
@@ -542,7 +549,7 @@ void Game::BuildDescriptorHeaps()
 	auto QuitBtnTex = mTextures["QuitBtnTex"]->Resource;
 	auto SelectionBtnTex = mTextures["SelectionBtnTex"]->Resource;
 	auto OptionsBtnTex = mTextures["OptionsBtnTex"]->Resource;
-	auto PlayBtn = mTextures["PlayBtn"]->Resource;
+	//auto PlayBtn = mTextures["PlayBtn"]->Resource;
 
 
 
@@ -772,8 +779,8 @@ void Game::BuildMaterials()
 
 	auto PlayBtnTex = std::make_unique<Material>();
 	PlayBtnTex->Name = "PlayBtnTex";
-	PlayBtnTex->MatCBIndex = 5;
-	PlayBtnTex->DiffuseSrvHeapIndex = 5;
+	PlayBtnTex->MatCBIndex = 4;
+	PlayBtnTex->DiffuseSrvHeapIndex = 4;
 	PlayBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	PlayBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	PlayBtnTex->Roughness = 0.2f;
@@ -914,8 +921,8 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 
 void Game::registerStates()
 {
-	mStateStack.registerState<TitleState>(States::Title, this);
-	mStateStack.registerState<MenuState>(States::Menu, this);
-	mStateStack.registerState<GameState>(States::Game, this);
-	mStateStack.registerState<PauseState>(States::Pause, this);
+	mStateStack.registerState<TitleState>(States::Title);
+	mStateStack.registerState<MenuState>(States::Menu);
+	mStateStack.registerState<GameState>(States::Game);
+	mStateStack.registerState<PauseState>(States::Pause);
 }

@@ -5,7 +5,7 @@
 //#include "World.hpp"
 //#include "ResourceIdentifiers.hpp"
 #include "StateIdentifiers.hpp"
-
+#include "SceneNode.hpp"
 
 
 
@@ -25,31 +25,36 @@ public:
 
 	struct Context
 	{
-		Context(Player& player);
-		
+		Context(Player* player, Game* mGame);
+		Game* mGame;
 		Player* player;
 	};
 
 public:
-	State(StateStack& stack, Context context, Game* game);
+	State(StateStack* mstack, Context* context);
 	virtual ~State();
 
 	virtual void draw() = 0;
 	virtual bool update(const GameTimer& gt) = 0;
-	virtual bool handleEvent(WPARAM btn) = 0;
-	//virtual bool handleRealtimeInput() = 0;
-	virtual void LoadScene();
-	Game* mGame;
-
+	virtual bool handleEvent(WPARAM btnState) = 0;
+	virtual bool handleRealTimeInput() = 0;
+	virtual void LoadScene() = 0;
+	
+	Context*		getContext() const;
 protected:
 	void	requestStackPush(States::ID stateID);
 	void	requestStackPop();
 	void	requestStateClear();
 
-	Context		getContext() const;
-StateStack* mStack;
+	std::unique_ptr<SceneNode> mSceneGraph;
+
+	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
+
+	
+	StateStack*		mStack;
+	Context*		mContext;
 private:
 	
-	Context		mContext;
+	
 };
 

@@ -5,11 +5,10 @@
 //#include "Game.hpp"
 
 
-MenuState::MenuState(StateStack& stack, Context context, Game* game)
-	: State(stack, context, game)
+MenuState::MenuState(StateStack* stack, Context* context)
+	: State(stack, context)
 , mOptionsBtn(nullptr)
 , mOptionIndex(0)
-, mSceneGraph(new SceneNode(game))
 , mPlayBtn(nullptr)
 , mQuitBtn(nullptr)
 {
@@ -29,16 +28,16 @@ bool MenuState::update(const GameTimer& gt)
 	return true;
 }
 
-bool MenuState::handleEvent(WPARAM btn)
+bool MenuState::handleEvent(WPARAM btnState)
 {
-	if (btn == 'E')
+	if (btnState == 'E')
 	{
 		//requestStackPop();
 		requestStateClear();
 		requestStackPush(States::Game);
 		return true;
 	}
-	else if (btn == VK_BACK)
+	else if (btnState == VK_BACK)
 	{
 		requestStackPop();
 		requestStackPush(States::Title);
@@ -48,11 +47,17 @@ bool MenuState::handleEvent(WPARAM btn)
 		return true;
 }
 
+bool MenuState::handleRealTimeInput()
+{
+
+}
+
 void MenuState::LoadScene()
 {
-	mGame->mAllRitems.clear();
-	mGame->mOpaqueRitems.clear();
-	mGame->mFrameResources.clear();
+	mContext->mGame->mAllRitems.clear();
+	mContext->mGame->mOpaqueRitems.clear();
+	mContext->mGame->mFrameResources.clear();
+	mContext->mGame->BuildMaterials();
 
 	/*std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, "TitleBGTex"));
 	mBackgroundSprite = backgroundSprite.get();
@@ -61,18 +66,18 @@ void MenuState::LoadScene()
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(backgroundSprite));*/
 
-	std::unique_ptr<SpriteNode> mSelect(new SpriteNode(mGame, "SelectionBtnTex"));
+	std::unique_ptr<SpriteNode> mSelect(new SpriteNode(mContext->mGame, "SelectionBtnTex"));
 	mBackgroundSprite = mSelect.get();
-	mBackgroundSprite->setPosition(0, 0, 0);
-	mBackgroundSprite->setScale(60.0, 10, 40);
+	mBackgroundSprite->setPosition(300, 0, 200);
+	mBackgroundSprite->setScale(1.0, 10, 40);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(mSelect));
 
 	mSceneGraph->build();
-	for (auto& e : mGame->mAllRitems)
-		mGame->mOpaqueRitems.push_back(e.get());
+	for (auto& e : mContext->mGame->mAllRitems)
+		mContext->mGame->mOpaqueRitems.push_back(e.get());
 
-	mGame->BuildFrameResources();
+	mContext->mGame->BuildFrameResources();
 }
 
 //bool MenuState::handleRealtimeInput()

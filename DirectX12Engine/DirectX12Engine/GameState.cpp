@@ -1,46 +1,51 @@
 #include "GameState.hpp"
 #include "Game.hpp"
 
-GameState::GameState(StateStack& stack, Context context, Game* game)
-	:State(stack, context, game)
-	, mWorld(&(mGame->mWorld))
-	, mPlayer(*context.player)
+GameState::GameState(StateStack* stack, Context* context)
+	:State(stack, context)
+	, mWorld(mContext->mGame)
+
 {
 	LoadScene();
 }
 
 void GameState::draw()
 {
-	mWorld->draw();
+	mWorld.draw();
 }
 
 void GameState::ProcessInput()
 {
-	CommandQueue& commands = mWorld->getCommandQueue();
-	(getContext().player)->handleEvent(commands);
-	(getContext().player)->handleRealtimeInput(commands);
+	CommandQueue& commands = mWorld.getCommandQueue();
+	(getContext()->player)->handleEvent(commands);
+	(getContext()->player)->handleRealtimeInput(commands);
 }
 
 bool GameState::update(const GameTimer& gt)
 {
 	ProcessInput();
-	mWorld->update(gt);
+	mWorld.update(gt);
 	
 	//mPlayer.handleRealtimeInput(commands);
 	return true;
 }
 
-bool GameState::handleEvent(WPARAM btn)
+bool GameState::handleEvent(WPARAM btnState)
 {
 	//CommandQueue& commands = mWorld->getCommandQueue();
 	//mPlayer.handleEvent(commands);
 
-	if (btn == 'P')
+	if (btnState == 'P')
 	{
 		requestStackPush(States::Pause);
 	}
 	return true;
 }
+
+ bool GameState::handleRealTimeInput()
+ {
+	 return true;
+ }
 
 void GameState::LoadScene()
 {

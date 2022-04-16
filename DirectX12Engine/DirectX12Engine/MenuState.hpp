@@ -8,28 +8,29 @@
 class MenuState : public State
 {
 public:
-	MenuState(StateStack& stack, Context context, Game* game);
+	MenuState(StateStack* stack, Context* context);
 	virtual ~MenuState();
-	virtual void			draw() override;
-	virtual bool			update(const GameTimer& gt) override;
-	virtual bool			handleEvent(WPARAM btn) override;
-	//virtual bool			handleRealtimeInput()override;
+
+	virtual void		draw() override;
+	virtual bool		update(const GameTimer& gt) override;
+	virtual bool		handleEvent(WPARAM btnState) override;
+	virtual bool 		handleRealTimeInput() override;
+	virtual void 		LoadScene() override;
 	void					updateOptionText();
 
-
+	virtual void LoadScene() override;
 private:
 	enum OptionNames
 	{
 		Play,
 		Exit,
 	};
-
+	
 
 private:
 	//sf::Sprite				mBackgroundSprite;
 
 	//std::vector<DirectX::SpriteFont>	mOptions;
-	SceneNode* mSceneGraph;
 	SpriteNode* mBackgroundSprite;
 	SpriteNode* mPlayBtn;
 	SpriteNode* mOptionsBtn;
@@ -37,7 +38,6 @@ private:
 	SpriteNode* mSelect;
 	std::size_t				mOptionIndex;
 
-	virtual void LoadScene() override;
-};
+	
 
 #endif // BOOK_MENUSTATE_HPP
