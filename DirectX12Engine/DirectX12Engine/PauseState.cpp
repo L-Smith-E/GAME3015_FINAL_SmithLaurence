@@ -31,12 +31,13 @@ bool PauseState::handleEvent(WPARAM btnState)
 
 	if (btnState == 'P')
 	{
-		requestStackPop();
+		requestStateClear();
+		//requestStackPop();
 		requestStackPush(States::Game);
 	}
 	else if (btnState == VK_BACK)
 	{
-		requestStateClear();
+		
 		requestStackPush(States::Menu);
 	}
 	return false;
@@ -56,7 +57,7 @@ void PauseState::LoadScene()
 	std::unique_ptr<SpriteNode> PauseScrn(new SpriteNode(mContext->mGame, "PauseTex"));
 	mBackgroundSprite = PauseScrn.get();
 	mBackgroundSprite->setPosition(6, 0, 20);
-	mBackgroundSprite->setScale(5, 5, 5);
+	mBackgroundSprite->setScale(10, 5, 10);
 	mBackgroundSprite->setWorldRotation(0, 0, 0);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(PauseScrn));

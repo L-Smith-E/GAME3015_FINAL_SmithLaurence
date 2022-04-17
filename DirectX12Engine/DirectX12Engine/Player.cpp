@@ -114,12 +114,12 @@ char Player::getAssignedKey(Action action) const
 
 void Player::initializeActions()
 {
-	const float playerSpeed = 0.01f;
+	const float playerSpeed = 0.2f;
 
 	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f, 0.0f));
 	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+playerSpeed, 0.f, 0.0f));
-	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.f, 0.0f, +playerSpeed + 2.0f));
-	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.f, 0.0f, -playerSpeed + 2.0f));
+	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.f, 0.0f, +playerSpeed));
+	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.f, 0.0f, -playerSpeed));
 	/*mActionBinding[Pause].action = derivedAction<PauseState>(handleEvent())*/
 }
 

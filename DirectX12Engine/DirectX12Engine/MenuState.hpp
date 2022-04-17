@@ -35,6 +35,7 @@ private:
 	SpriteNode* mOptionsBtn;
 	SpriteNode* mQuitBtn;
 	SpriteNode* mSelect;
+	std::vector<SpriteNode*>	mOptions;
 	std::size_t				mOptionIndex;
 
 

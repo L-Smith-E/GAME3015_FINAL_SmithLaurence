@@ -50,7 +50,7 @@ void TitleState::LoadScene()
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mContext->mGame, "TitleBGTex"));
 	mBackgroundSprite = backgroundSprite.get();
 	mBackgroundSprite->setPosition(6, 0, 20);
-	mBackgroundSprite->setScale(10, 1, 8);
+	mBackgroundSprite->setScale(20, 1, 16);
 	mBackgroundSprite->setWorldRotation(0, 0, 0);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(backgroundSprite));

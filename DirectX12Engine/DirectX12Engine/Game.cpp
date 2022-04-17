@@ -23,7 +23,7 @@ bool Game::Initialize()
 
 	mMainWndCaption = L"DirectX12Engine - Final";
 
-	mCamera.SetPosition(6.0f, 10.0f, 20.0f);
+	mCamera.SetPosition(6.0f, 20.0f, 20.0f);
 	mCamera.Pitch(3.14f / 2.0f);
 
 	/*mCamera.SetPosition(0, 0, -20);
@@ -439,7 +439,7 @@ void Game::LoadTextures()
 	//Play Btn
 	auto PlayBtnTex = std::make_unique<Texture>();
 	PlayBtnTex->Name = "PlayBtnTex";
-	PlayBtnTex->Filename = L"../../Textures/playb.dds";
+	PlayBtnTex->Filename = L"../../Textures/PlayButton.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), PlayBtnTex->Filename.c_str(),
 		PlayBtnTex->Resource, PlayBtnTex->UploadHeap));
@@ -556,7 +556,6 @@ void Game::BuildDescriptorHeaps()
 	auto PlayBtnTex = mTextures["PlayBtnTex"]->Resource;
 	auto SelectionBtnTex = mTextures["SelectionBtnTex"]->Resource;
 	auto QuitBtnTex = mTextures["QuitBtnTex"]->Resource;
-	
 	auto OptionsBtnTex = mTextures["OptionsBtnTex"]->Resource;
 	auto MenuBGTex = mTextures["MenuBGTex"]->Resource;
 
@@ -628,8 +627,8 @@ void Game::BuildDescriptorHeaps()
 
 	//OptionsBtn Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = OptionsBtnTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(OptionsBtnTex.Get(), &srvDesc, hDescriptor);
+	srvDesc.Format = MenuBGTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(MenuBGTex.Get(), &srvDesc, hDescriptor);
 }
 
 void Game::BuildShadersAndInputLayout()
@@ -801,25 +800,25 @@ void Game::BuildMaterials()
 
 	mMaterials["PlayBtnTex"] = std::move(PlayBtnTex);
 
-	auto QuitBtnTex = std::make_unique<Material>();
-	QuitBtnTex->Name = "QuitBtnTex";
-	QuitBtnTex->MatCBIndex = 6;
-	QuitBtnTex->DiffuseSrvHeapIndex = 6;
-	QuitBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	QuitBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	QuitBtnTex->Roughness = 0.2f;
-
-	mMaterials["QuitBtnTex"] = std::move(QuitBtnTex);
-
 	auto SelectionBtnTex = std::make_unique<Material>();
 	SelectionBtnTex->Name = "SelectionBtnTex";
-	SelectionBtnTex->MatCBIndex = 7;
-	SelectionBtnTex->DiffuseSrvHeapIndex = 7;
+	SelectionBtnTex->MatCBIndex = 6;
+	SelectionBtnTex->DiffuseSrvHeapIndex = 6;
 	SelectionBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	SelectionBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	SelectionBtnTex->Roughness = 0.2f;
 
 	mMaterials["SelectionBtnTex"] = std::move(SelectionBtnTex);
+
+auto QuitBtnTex = std::make_unique<Material>();
+	QuitBtnTex->Name = "QuitBtnTex";
+	QuitBtnTex->MatCBIndex = 7;
+	QuitBtnTex->DiffuseSrvHeapIndex = 7;
+	QuitBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	QuitBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	QuitBtnTex->Roughness = 0.2f;
+
+	mMaterials["QuitBtnTex"] = std::move(QuitBtnTex);
 
 	auto OptionBtnTex = std::make_unique<Material>();
 	OptionBtnTex->Name = "OptionBtnTex";

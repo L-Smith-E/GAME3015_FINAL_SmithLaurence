@@ -30,11 +30,39 @@ bool MenuState::update(const GameTimer& gt)
 
 bool MenuState::handleEvent(WPARAM btnState)
 {
-	if (btnState == 'E')
+	if (btnState == 'W' || btnState == VK_UP)
 	{
-		//requestStackPop();
-		requestStateClear();
-		requestStackPush(States::Game);
+		if (mOptionIndex > 0)
+		{
+			mOptionIndex--;
+			//LoadScene();
+		}
+		else
+			mOptionIndex = mOptions.size() - 1;
+	}
+	else if (btnState == 'S' || btnState == VK_DOWN)
+	{
+		if (mOptionIndex < mOptions.size() - 1)
+		{
+			mOptionIndex++;
+		}
+		else
+			mOptionIndex = 0;
+	}
+
+	else if (btnState == 'E' || btnState == VK_RETURN)
+	{
+		if (mOptionIndex == Play)
+		{
+			requestStackPop();
+			requestStackPush(States::Game);
+		}
+		else if (mOptionIndex == Exit)
+		{
+			requestStackPop();
+			requestStackPush(States::Title);
+		}
+		//requestStateClear();
 		return true;
 	}
 	else if (btnState == VK_BACK)
@@ -44,6 +72,9 @@ bool MenuState::handleEvent(WPARAM btnState)
 		return true;
 	}
 	else
+	{
+		return false;
+	}
 		return true;
 }
 
@@ -61,23 +92,31 @@ void MenuState::LoadScene()
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mContext->mGame, "MenuBGTex"));
 	mBackgroundSprite = backgroundSprite.get();
-	mBackgroundSprite->setPosition(0, 0, 0);
-	mBackgroundSprite->setScale(600.0, 100000.0, 400);
+	mBackgroundSprite->setPosition(6, 0, 20);
+	mBackgroundSprite->setScale(26.0, 1.0, 19);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 
-	std::unique_ptr<SpriteNode> mSelect(new SpriteNode(mContext->mGame, "QuitBtnTex"));
-	mBackgroundSprite = mSelect.get();
-	mBackgroundSprite->setPosition(6, 0, 20);
-	mBackgroundSprite->setScale(1, 1, 1);
+	std::unique_ptr<SpriteNode> SelectionBtnTex(new SpriteNode(mContext->mGame, "SelectionBtnTex"));
+	mSelect = SelectionBtnTex.get();
+	mSelect->setPosition(12.5, 1, 20);
+	mSelect->setScale(1, 1, 1);
+	mSelect->setWorldRotation(0, 0, 0);
+	mSelect->setVelocity(0, 0, 0);
+	mSceneGraph->attachChild(std::move(SelectionBtnTex));
+
+	std::unique_ptr<SpriteNode> mPlay(new SpriteNode(mContext->mGame, "PlayBtnTex"));
+	mBackgroundSprite = mPlay.get();
+	mBackgroundSprite->setPosition(15, 1, 20.0f);
+	mBackgroundSprite->setScale(4, 1, 2);
 	mBackgroundSprite->setWorldRotation(0, 0, 0);
 	mBackgroundSprite->setVelocity(0, 0, 0);
-	mSceneGraph->attachChild(std::move(mSelect));
+	mSceneGraph->attachChild(std::move(mPlay));
 
 	std::unique_ptr<SpriteNode> mQuit(new SpriteNode(mContext->mGame, "QuitBtnTex"));
 	mBackgroundSprite = mQuit.get();
-	mBackgroundSprite->setPosition(6, 0, 18.5f);
-	mBackgroundSprite->setScale(1, 1, 1);
+	mBackgroundSprite->setPosition(15, 1, 16.5f);
+	mBackgroundSprite->setScale(4, 1, 2);
 	mBackgroundSprite->setWorldRotation(0, 0, 0);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(mQuit));
