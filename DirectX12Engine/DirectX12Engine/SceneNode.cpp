@@ -17,7 +17,7 @@ void SceneNode::attachChild(ScenePtr child)
 	mChildren.push_back(std::move(child));
 }
 
-ScenePtr SceneNode::detachChild(const SceneNode& node)
+SceneNode::ScenePtr SceneNode::detachChild(const SceneNode& node)
 {
 	auto found = std::find_if(mChildren.begin(), mChildren.end(), [&](ScenePtr& p) { return p.get() == &node; });
 	assert(found != mChildren.end());
@@ -133,6 +133,13 @@ XMFLOAT4X4 SceneNode::getWorldTransform() const
 XMFLOAT4X4 SceneNode::getTransform() const
 {
 	XMFLOAT4X4 transform;
+	XMVECTOR scale, pos, rot;
+	scale = XMLoadFloat3(&mWorldScaling);
+	pos = XMLoadFloat3(&mWorldPosition);
+	rot = XMLoadFloat3(&mWorldRotation);
+	XMStoreFloat4x4(&transform, XMMatrixAffineTransformation(scale, XMVECTOR{}, rot, pos));
+	return transform;
+
 	XMStoreFloat4x4(&transform, XMMatrixScaling(mWorldScaling.x, mWorldScaling.y, mWorldScaling.z) *
 		XMMatrixRotationX(mWorldRotation.x) *
 		XMMatrixRotationY(mWorldRotation.y) *

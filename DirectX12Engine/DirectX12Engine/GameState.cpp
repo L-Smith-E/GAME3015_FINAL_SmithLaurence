@@ -49,6 +49,18 @@ bool GameState::handleEvent(WPARAM btnState)
 
 void GameState::LoadScene()
 {
+	//Clear items, and resources.
+	mContext->mGame->mAllRitems.clear();
+	mContext->mGame->mOpaqueRitems.clear();
+	mContext->mGame->mFrameResources.clear();
+	// Build our materials
+	mContext->mGame->BuildMaterials();
+	mWorld.buildScene();
+
+	for (auto& e : mContext->mGame->mAllRitems)
+		mContext->mGame->mOpaqueRitems.push_back(e.get());
+
+	mContext->mGame->BuildFrameResources();
 	/*mGame->mAllRitems.clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();

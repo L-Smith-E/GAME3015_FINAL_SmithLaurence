@@ -33,7 +33,7 @@ unsigned int Aircraft::getCategory() const
 
 void Aircraft::drawCurrent() const
 {
-	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
+	/*UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
 	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
 
 	//Game* game = mState->GetContext().game;
@@ -58,7 +58,7 @@ void Aircraft::drawCurrent() const
 		game->getCmdList()->SetGraphicsRootConstantBufferView(3, matCBAddress);
 
 		game->getCmdList()->DrawIndexedInstanced(mAircraftRitem->IndexCount, 1, mAircraftRitem->StartIndexLocation, mAircraftRitem->BaseVertexLocation, 0);
-	}
+	}*/
 }
 
 void Aircraft::buildCurrent()

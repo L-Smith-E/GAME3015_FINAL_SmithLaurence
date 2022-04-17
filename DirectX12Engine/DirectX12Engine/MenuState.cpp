@@ -49,7 +49,7 @@ bool MenuState::handleEvent(WPARAM btnState)
 
 bool MenuState::handleRealTimeInput()
 {
-
+	return true;
 }
 
 void MenuState::LoadScene()
@@ -59,19 +59,28 @@ void MenuState::LoadScene()
 	mContext->mGame->mFrameResources.clear();
 	mContext->mGame->BuildMaterials();
 
-	/*std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, "TitleBGTex"));
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mContext->mGame, "MenuBGTex"));
 	mBackgroundSprite = backgroundSprite.get();
 	mBackgroundSprite->setPosition(0, 0, 0);
 	mBackgroundSprite->setScale(600.0, 100000.0, 400);
 	mBackgroundSprite->setVelocity(0, 0, 0);
-	mSceneGraph->attachChild(std::move(backgroundSprite));*/
+	mSceneGraph->attachChild(std::move(backgroundSprite));
 
-	std::unique_ptr<SpriteNode> mSelect(new SpriteNode(mContext->mGame, "SelectionBtnTex"));
+	std::unique_ptr<SpriteNode> mSelect(new SpriteNode(mContext->mGame, "QuitBtnTex"));
 	mBackgroundSprite = mSelect.get();
-	mBackgroundSprite->setPosition(300, 0, 200);
-	mBackgroundSprite->setScale(1.0, 10, 40);
+	mBackgroundSprite->setPosition(6, 0, 20);
+	mBackgroundSprite->setScale(1, 1, 1);
+	mBackgroundSprite->setWorldRotation(0, 0, 0);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(mSelect));
+
+	std::unique_ptr<SpriteNode> mQuit(new SpriteNode(mContext->mGame, "QuitBtnTex"));
+	mBackgroundSprite = mQuit.get();
+	mBackgroundSprite->setPosition(6, 0, 18.5f);
+	mBackgroundSprite->setScale(1, 1, 1);
+	mBackgroundSprite->setWorldRotation(0, 0, 0);
+	mBackgroundSprite->setVelocity(0, 0, 0);
+	mSceneGraph->attachChild(std::move(mQuit));
 
 	mSceneGraph->build();
 	for (auto& e : mContext->mGame->mAllRitems)

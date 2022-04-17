@@ -22,7 +22,9 @@ private:
 	SpriteNode* mPausedText;
 	SpriteNode* mInstructionText;
 
-private:
+	
+public:
+
 	
 };
 #pragma endregion

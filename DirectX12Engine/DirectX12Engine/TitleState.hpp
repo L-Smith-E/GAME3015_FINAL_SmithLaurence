@@ -16,7 +16,6 @@ public:
 	virtual bool		handleEvent(WPARAM btnState) override;
 	virtual bool 		handleRealTimeInput() override;
 	virtual void 		LoadScene() override;
-	virtual void LoadScene() override;
 
 private:
 	//SceneNode* mSceneGraph;

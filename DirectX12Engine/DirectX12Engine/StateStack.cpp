@@ -2,6 +2,8 @@
 
 #include <cassert>
 
+#include "Game.hpp"
+
 StateStack::StateStack(State::Context context)
 	:mStack()
 ,mPendingList()
@@ -85,6 +87,7 @@ void StateStack::applyPendingChanges()
 		switch (change.action)
 		{
 		case Push:
+			mContext.mGame->FlushCommandQueue();
 			mStack.push_back(createState(change.stateID));
 			break;
 

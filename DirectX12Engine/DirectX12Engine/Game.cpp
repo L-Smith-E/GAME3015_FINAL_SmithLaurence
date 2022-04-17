@@ -26,6 +26,10 @@ bool Game::Initialize()
 	mCamera.SetPosition(6.0f, 10.0f, 20.0f);
 	mCamera.Pitch(3.14f / 2.0f);
 
+	/*mCamera.SetPosition(0, 0, -20);
+	mCamera.Pitch(0);
+	*/
+
 	// Reset the command list to prep for initialization commands.
 	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
 
@@ -135,9 +139,9 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	mStateStack.draw();
+	//mStateStack.draw();
 	//mWorld.draw();
-	//DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
+	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -283,6 +287,10 @@ void Game::UpdateCamera(const GameTimer& gt)
 	//XMStoreFloat4x4(&mView, view);
 
 	mCamera.UpdateViewMatrix();
+}
+
+void Game::AnimateMaterials(const GameTimer& gt)
+{
 }
 
 //void Game::AnimateMaterials(const GameTimer& gt)
@@ -468,14 +476,14 @@ void Game::LoadTextures()
 
 	mTextures[OptionsBtnTex->Name] = std::move(OptionsBtnTex);
 
-	/*auto SelectionBtnTex = std::make_unique<Texture>();
-	SelectionBtnTex->Name = "SelectionBtnTex";
-	SelectionBtnTex->Filename = L"../../Textures/play button.dds";
+	auto MenuBGTex = std::make_unique<Texture>();
+	MenuBGTex->Name = "MenuBGTex";
+	MenuBGTex->Filename = L"../../Textures/TitleScreen.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), SelectionBtnTex->Filename.c_str(),
-		SelectionBtnTex->Resource, SelectionBtnTex->UploadHeap));
+		mCommandList.Get(), MenuBGTex->Filename.c_str(),
+		MenuBGTex->Resource, MenuBGTex->UploadHeap));
 
-	mTextures[SelectionBtnTex->Name] = std::move(SelectionBtnTex);*/
+	mTextures[MenuBGTex->Name] = std::move(MenuBGTex);
 
 
 }
@@ -530,7 +538,7 @@ void Game::BuildDescriptorHeaps()
 	// Create the SRV heap.
 	//
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = 9;
+	srvHeapDesc.NumDescriptors = 10;
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
@@ -546,10 +554,11 @@ void Game::BuildDescriptorHeaps()
 	auto TitleBGTex = mTextures["TitleBGTex"]->Resource;
 	auto PauseTex = mTextures["PauseTex"]->Resource;
 	auto PlayBtnTex = mTextures["PlayBtnTex"]->Resource;
-	auto QuitBtnTex = mTextures["QuitBtnTex"]->Resource;
 	auto SelectionBtnTex = mTextures["SelectionBtnTex"]->Resource;
+	auto QuitBtnTex = mTextures["QuitBtnTex"]->Resource;
+	
 	auto OptionsBtnTex = mTextures["OptionsBtnTex"]->Resource;
-	//auto PlayBtn = mTextures["PlayBtn"]->Resource;
+	auto MenuBGTex = mTextures["MenuBGTex"]->Resource;
 
 
 
@@ -611,6 +620,11 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = QuitBtnTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(QuitBtnTex.Get(), &srvDesc, hDescriptor);
+
+	//OptionsBtn Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = OptionsBtnTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(OptionsBtnTex.Get(), &srvDesc, hDescriptor);
 
 	//OptionsBtn Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
@@ -779,8 +793,8 @@ void Game::BuildMaterials()
 
 	auto PlayBtnTex = std::make_unique<Material>();
 	PlayBtnTex->Name = "PlayBtnTex";
-	PlayBtnTex->MatCBIndex = 4;
-	PlayBtnTex->DiffuseSrvHeapIndex = 4;
+	PlayBtnTex->MatCBIndex = 5;
+	PlayBtnTex->DiffuseSrvHeapIndex = 5;
 	PlayBtnTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	PlayBtnTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	PlayBtnTex->Roughness = 0.2f;
@@ -816,6 +830,16 @@ void Game::BuildMaterials()
 	OptionBtnTex->Roughness = 0.2f;
 
 	mMaterials["OptionBtnTex"] = std::move(OptionBtnTex);
+
+	auto MenuBGTex = std::make_unique<Material>();
+	MenuBGTex->Name = "MenuBGTex";
+	MenuBGTex->MatCBIndex = 9;
+	MenuBGTex->DiffuseSrvHeapIndex = 9;
+	MenuBGTex->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	MenuBGTex->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
+	MenuBGTex->Roughness = 0.2f;
+
+	mMaterials["MenuBGTex"] = std::move(MenuBGTex);
 
 }
 

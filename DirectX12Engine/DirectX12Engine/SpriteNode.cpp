@@ -8,7 +8,7 @@ SpriteNode::SpriteNode(Game* game, std::string sprite) : Entity(game)
 
 void SpriteNode::drawCurrent() const
 {
-	renderer->World = getTransform();
+	/*renderer->World = getTransform();
 	renderer->NumFramesDirty++;
 
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
@@ -34,7 +34,7 @@ void SpriteNode::drawCurrent() const
 		game->getCmdList()->SetGraphicsRootConstantBufferView(3, matCBAddress);
 
 		game->getCmdList()->DrawIndexedInstanced(mSpriteNodeRitem->IndexCount, 1, mSpriteNodeRitem->StartIndexLocation, mSpriteNodeRitem->BaseVertexLocation, 0);
-	}
+	}*/
 
 }
 
@@ -43,7 +43,7 @@ void SpriteNode::buildCurrent()
 	auto render = std::make_unique<RenderItem>();
 	renderer = render.get();
 	renderer->World = getTransform();
-	XMStoreFloat4x4(&renderer->TexTransform, XMMatrixScaling(50.0f, 50.0f, 1.0f));
+	XMStoreFloat4x4(&renderer->TexTransform, XMMatrixScaling(1, 1, 1.0f));
 	renderer->ObjCBIndex = (UINT) game->getRenderItems().size();
 	renderer->Mat = game->getMaterials()[mSprite].get();
 	renderer->Geo = game->getGeometries()["boxGeo"].get();

@@ -35,7 +35,7 @@ bool TitleState::handleEvent(WPARAM btnState)
 
  bool TitleState::handleRealTimeInput()
  {
-
+	 return true;
  }
 
 void TitleState::LoadScene()
@@ -49,8 +49,9 @@ void TitleState::LoadScene()
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mContext->mGame, "TitleBGTex"));
 	mBackgroundSprite = backgroundSprite.get();
-	mBackgroundSprite->setPosition(0, 0, 0);
-	mBackgroundSprite->setScale(600.0, 100000.0, 400);
+	mBackgroundSprite->setPosition(6, 0, 20);
+	mBackgroundSprite->setScale(10, 1, 8);
+	mBackgroundSprite->setWorldRotation(0, 0, 0);
 	mBackgroundSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 

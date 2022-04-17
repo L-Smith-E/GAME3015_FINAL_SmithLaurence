@@ -1,6 +1,7 @@
 #pragma once
 #include "Command.hpp"
 #include <map>
+#include "SceneNode.hpp"
 
 class CommandQueue;
 
@@ -36,6 +37,7 @@ private:
 	std::map<char, Action>	mKeyBinding;
 	std::map<Action, Command>	mActionBinding;
 	std::map<char, bool>	mKeyFlag;
+	
 };
 
 

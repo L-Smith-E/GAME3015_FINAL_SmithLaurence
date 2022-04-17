@@ -18,14 +18,13 @@ public:
 	virtual void 		LoadScene() override;
 	void					updateOptionText();
 
-	virtual void LoadScene() override;
 private:
 	enum OptionNames
 	{
 		Play,
 		Exit,
 	};
-	
+
 
 private:
 	//sf::Sprite				mBackgroundSprite;
@@ -38,6 +37,7 @@ private:
 	SpriteNode* mSelect;
 	std::size_t				mOptionIndex;
 
-	
 
+
+};
 #endif // BOOK_MENUSTATE_HPP

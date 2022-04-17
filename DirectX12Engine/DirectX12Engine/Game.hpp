@@ -32,7 +32,7 @@ public:
 	virtual void OnMouseMove(WPARAM btnState, int x, int y)override;
 	//virtual void processEvents(WPARAM btnState) override;
 
-	virtual void OnKeyboardInput(WPARAM btnState);
+	virtual void OnKeyboardInput(WPARAM btnState) override;
 	void UpdateCamera(const GameTimer& gt);
 	void AnimateMaterials(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
