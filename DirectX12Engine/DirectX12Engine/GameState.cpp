@@ -49,6 +49,9 @@ bool GameState::handleEvent(WPARAM btnState)
 
 void GameState::LoadScene()
 {
+
+	mContext->mGame->mCamera.SetPosition(6.0f, 13.0f, 10.0f);
+	mContext->mGame->mCamera.Pitch(275.1f);
 	//Clear items, and resources.
 	mContext->mGame->mAllRitems.clear();
 	mContext->mGame->mOpaqueRitems.clear();

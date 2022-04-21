@@ -13,6 +13,7 @@ MenuState::MenuState(StateStack* stack, Context* context)
 , mQuitBtn(nullptr)
 {
 	LoadScene();
+	
 }
 MenuState::~MenuState()
 {

@@ -34,11 +34,16 @@ bool PauseState::handleEvent(WPARAM btnState)
 		requestStateClear();
 		//requestStackPop();
 		requestStackPush(States::Game);
+		
 	}
 	else if (btnState == VK_BACK)
 	{
 		
 		requestStackPush(States::Menu);
+		mContext->mGame->mCamera.SetPosition(6.0f, 20.0f, 20.0f);
+		//mContext->mGame->mCamera.Pitch(3.14f / 2.0f);
+		//mContext->mGame->mCamera.Pitch(-265.2f);
+
 	}
 	return false;
 }
@@ -49,6 +54,9 @@ bool PauseState::handleEvent(WPARAM btnState)
 
 void PauseState::LoadScene()
 {
+	mContext->mGame->mCamera.SetPosition(6.0f, 20.0f, 20.0f);
+	mContext->mGame->mCamera.Pitch(265.2f);
+
 	mContext->mGame->mAllRitems.clear();
 	mContext->mGame->mOpaqueRitems.clear();
 	mContext->mGame->mFrameResources.clear();

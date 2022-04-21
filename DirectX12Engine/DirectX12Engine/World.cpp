@@ -66,7 +66,8 @@ void World::buildScene()
 	auto pos = XMVECTOR{ 6, 1, 20 };
 	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Type::Eagle, mGame));
 	mPlayerAircraft = player.get();
-	mPlayerAircraft->setPosition(pos.m128_f32[0], pos.m128_f32[1], pos.m128_f32[2]);
+	//mPlayerAircraft->setPosition(pos.m128_f32[0], pos.m128_f32[1], pos.m128_f32[2]);
+	mPlayerAircraft->setPosition(pos.m128_f32[0], 10, pos.m128_f32[2]);
 	mPlayerAircraft->setScale(1, 1, 1);
 	mPlayerAircraft->setVelocity(mScrollSpeed, 0.0f, 0.0f);
 	mSceneGraph->attachChild(std::move(player));
